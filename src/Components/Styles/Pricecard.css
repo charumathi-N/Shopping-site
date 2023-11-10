@@ -10,8 +10,8 @@
 }
 .container{
     display: flex;
-    flex-wrap: wrap;
-    display: inline;
+    flex-wrap: wrap; 
+    display: block;
 }
 .cardBody{
     position: relative;
