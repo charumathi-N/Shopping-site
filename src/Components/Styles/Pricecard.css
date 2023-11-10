@@ -1,0 +1,36 @@
+.row{
+    color: white;
+}
+.col{
+    padding:25px;
+}
+.card{
+    height: 350px;
+    width: 250px;
+}
+.container{
+    display: flex;
+    flex-wrap: wrap;
+    display: inline;
+}
+.cardBody{
+    position: relative;
+}
+.Button{
+    position: absolute;
+    bottom: 20px;
+}
+.badge{
+    background-color: black;
+    color: white;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+@media (min-width:875px) and (max-width:1176px) {
+    .card{
+        height: 320px;
+        width: 180px;
+    }
+}
