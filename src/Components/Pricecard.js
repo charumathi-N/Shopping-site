@@ -9,7 +9,7 @@ import "./Styles/Pricecard.css";
 import Table from "./Table.js";
 import { useState } from "react";
 
-function Pricecard({ count, cartHandler,isVisible, isDisable }) {
+function Pricecard({ count, cartHandler,isVisible, isDisable}) {
 
   //Datas needs to be generated in cards
   const data1 = [
@@ -19,7 +19,7 @@ function Pricecard({ count, cartHandler,isVisible, isDisable }) {
       Star: "",
       Rate: "$40.00 - $80.00",
       Button_desc: "View Option",
-    },
+          },
     {
       img: "https://dummyimage.com/450x300/dee2e6/6c757d.jpg",
       Title: "Special items",
@@ -27,7 +27,7 @@ function Pricecard({ count, cartHandler,isVisible, isDisable }) {
       Rate: "$20.00 - $18.00",
       Button_desc: "Add to Cart",
       Sales_button: "Sale",
-    },
+          },
     {
       img: "https://dummyimage.com/450x300/dee2e6/6c757d.jpg",
       Title: "Sales items",
@@ -35,14 +35,14 @@ function Pricecard({ count, cartHandler,isVisible, isDisable }) {
       Rate: "$50.00 - $25.00",
       Button_desc: "Add to Cart",
       Sales_button: "Sale",
-    },
+          },
     {
       img: "https://dummyimage.com/450x300/dee2e6/6c757d.jpg",
       Title: "Popular items",
       Star: "⭐⭐⭐⭐",
       Rate: "$40.00",
       Button_desc: "Add to Cart",
-    },
+          },
   ];
   //data's for 2nd row
   const data2 = [
@@ -53,14 +53,14 @@ function Pricecard({ count, cartHandler,isVisible, isDisable }) {
       Rate: "$50.00 - $25.00",
       Button_desc: "Add to Cart",
       Sales_button: "Sale",
-    },
+          },
     {
       img: "https://dummyimage.com/450x300/dee2e6/6c757d.jpg",
       Title: "Fancy Products",
       Star: "",
       Rate: "$40.00 - $80.00",
       Button_desc: "View Option",
-    },
+          },
     {
       img: "https://dummyimage.com/450x300/dee2e6/6c757d.jpg",
       Title: "Special items",
@@ -68,19 +68,35 @@ function Pricecard({ count, cartHandler,isVisible, isDisable }) {
       Rate: "$20.00 - $18.00",
       Button_desc: "Add to Cart",
       Sales_button: "Sale",
-    },
+          },
     {
       img: "https://dummyimage.com/450x300/dee2e6/6c757d.jpg",
       Title: "Popular items",
       Star: "⭐⭐⭐⭐",
       Rate: "$40.00",
       Button_desc: "Add to Cart",
-    },
+          },
   ];
+
+  const [disabledButtons, setDisabledButtons] = useState(Array(data1.length + data2.length).fill(false));
+  //For display Selected items inside a div 
+  const [selectedItems, setSelectedItems] = useState([]); 
+
+  const handleButtonClick = (index,x) => {
+    // Update the state to mark the button at the specified index as disabled
+    setDisabledButtons((prev) => {
+      const newDisabledButtons = [...prev];
+      newDisabledButtons[index] = true;
+      setSelectedItems((prevSelectedItems) => [...prevSelectedItems, x]); 
+      return newDisabledButtons;
+    });
+
+    // Call the cartHandler function or perform any other action
+    cartHandler();
+  };
 
   return (
     <>
-      {/* style={{ display: btnState ? "block" : "none" }} */}
       <Container className="container" style={{ display: isVisible ? "block" : "none" }}>
         <Row>
           {data1.map((x, index) => {
@@ -102,7 +118,8 @@ function Pricecard({ count, cartHandler,isVisible, isDisable }) {
                     <Button
                       variant="outline-dark"
                       className="Button"
-                      onClick={cartHandler}>                    
+                      onClick={() => handleButtonClick(index,x)}
+                    disabled={disabledButtons[index]} >                    
                       {x.Button_desc}
                     </Button>
                   </Card.Body>
@@ -114,6 +131,7 @@ function Pricecard({ count, cartHandler,isVisible, isDisable }) {
 
         <Row>
           {data2.map((x, index) => {
+             const totalIndex = data1.length + index;
             return (
               <Col key={index} className="col">
                 <Card className="card">
@@ -132,7 +150,8 @@ function Pricecard({ count, cartHandler,isVisible, isDisable }) {
                     <Button
                       variant="outline-dark"
                       className="Button"
-                      onClick={cartHandler}
+                      onClick={() => handleButtonClick(totalIndex,x)}
+                    disabled={disabledButtons[totalIndex]} 
                     >
                       {x.Button_desc}
                     </Button>
@@ -147,7 +166,7 @@ function Pricecard({ count, cartHandler,isVisible, isDisable }) {
 
       {/* table data */}
        <div style={{ display: isVisible ? "none" : "block" }}>
-           <Table/>
+            <Table selecteditems = {selectedItems}/>
       </div> 
     </>
   );

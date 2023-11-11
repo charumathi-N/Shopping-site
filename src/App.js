@@ -15,18 +15,19 @@ function App() {
 
    //Cart functionality
    let [Count, setCount] = useState(0);
+
    const CartHandler = ()=>{
      setCount(Count=Count+1);
-   }
-   
-  
+   }   
+ 
+
  
    //datas for the cards
    return (
     <>
     <Navigation count={Count} cartHandler={CartHandler} isVisible={isVisible} setIsVisible={setIsVisible}/> 
     <Banner/>
-    <Pricecard count={Count} cartHandler={CartHandler} isVisible={isVisible} isDisable={isButtonDisabled}/>
+    <Pricecard count={Count} cartHandler={CartHandler} isVisible={isVisible} isDisable={isButtonDisabled} />
     <Footer/>
     </>
    );

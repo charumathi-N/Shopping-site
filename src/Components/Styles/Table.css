@@ -1,22 +1,28 @@
-.Table{
-    background-color: aquamarine;
-    width: 100%;
-    height: 200px;
-    text-align: center;
+.rowWithBackground {
+  border: solid black 1px;
 }
-.custom-table{
-    height: 1400px;
-    width:90%;
-    margin: auto;
-    background-color: aqua;
-    margin-top:20px ;
-    top:20px;
+
+.data {
+  text-align: center; /* Adjust text alignment if needed */
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-size: 20px;
 }
+
+/* Add other styles as needed */
 .tableHeader{
     background-color: black;
-    color: white;
-    text-align: center;
+    margin-top: 10px;
+    color: #f0f0f0;
 }
-.col{
-    width: 200px;
+.custom-table{
+    width:100%;
+}
+.tableHeader > tr{
+   text-align: center;
+}
+.custom-table{
+   margin-top: 10px;
+}
+.btn{
+    margin: 10px 0px 10px 0px;
 }
